@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import SearchBar from '../components/SearchBar';
 import { IconButton } from 'react-native-paper';
+import Context from '../context/Context';
+import ContratoCard from '../components/ContratoCard';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const [term, setTerm] = useState('');
     //Geolocation.getCurrentPosition(info => console.log(info));
 
-    const data = [
+    const contratos = [
         {
             contrato: '9991',
             nombre: 'cliente 1',
@@ -47,7 +49,7 @@ const HomeScreen = () => {
                 <IconButton
                     icon="menu"
                     size={30}
-                    onPress={() => console.log('Pressed')}
+                    onPress={() => navigation.toggleDrawer()}
                 />
                 <IconButton
                     icon="sync"
@@ -64,26 +66,13 @@ const HomeScreen = () => {
                 }}
             />
             <FlatList
-                data={data}
+                data={contratos}
                 keyExtractor={(item) => item.contrato}
-                renderItem={({ item, index }) => {
-                    return (
-                        /*  contrato: '9991',
-                            nombre: 'cliente 1',
-                            cedula: '123',
-                            valor: '123'
-                        */
-                        <View style={styles.card} >
-                            <TouchableOpacity style={{ flex: 1, margin: 10 }} onPress={() => { console.log(1) }}>
-                                <View style={{ flex: 1, margin: 5 }}>
-                                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Contrato: {item.contrato}</Text>
-                                    <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>{item.nombre}</Text>
-                                    <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>{item.cedula}</Text>
-                                    <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>${item.valor}</Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    );
+                renderItem={({ item, index, }) => {
+                    if (contratos.length === index + 1) {
+                        return <ContratoCard item={item} last={true} />
+                    }
+                    return <ContratoCard item={item} last={false} />
                 }}
             />
         </View>
@@ -100,14 +89,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginBottom: 5,
-        marginTop: 20,
-    },
-    card: {
-        backgroundColor: 'white',
-        borderRadius: 5,
-        marginLeft: 20,
-        marginRight: 20,
-        marginVertical: 10,
+        marginTop: 10,
     },
 })
 

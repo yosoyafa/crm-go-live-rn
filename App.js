@@ -10,15 +10,22 @@ import HomeScreen from './src/screens/HomeScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+const tabs = () => {
+  return <Tab.Navigator>
+    <Tab.Screen name="Home" component={HomeScreen} />
+    <Tab.Screen name="History" component={HistoryScreen} />
+  </Tab.Navigator>
+}
 
 const App = () => {
   return (
     <Provider>
       <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="History" component={HistoryScreen} />
-        </Tab.Navigator>
+        <Drawer.Navigator>
+          <Drawer.Screen name="Home" component={tabs} />
+        </Drawer.Navigator>
       </NavigationContainer>
     </Provider>
   );

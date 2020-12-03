@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, IconButton } from 'react-native-paper';
 
-const ContratoCard = ({ item, last }) => {
+const ContratoCard = ({ item, last, gestion, recaudo, edicion }) => {
 
     const [optionsVisible, setOptionsVisible] = useState(false);
 
@@ -12,26 +12,32 @@ const ContratoCard = ({ item, last }) => {
             cedula: '123',
             valor: '123'
         */
-        <View>
+        <View style={{ flex: 1 }}>
             <View style={styles.card} >
+                <IconButton
+                    style={{ position: 'absolute', top: 0, right: 0, zIndex: 999 }}
+                    icon="cog"
+                    size={25}
+                    onPress={edicion}
+                />
                 <TouchableOpacity style={{ flex: 1, margin: 10 }} onPress={() => { setOptionsVisible(!optionsVisible) }}>
                     <View style={{ flex: 1, margin: 5 }}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Contrato: {item.contrato}</Text>
-                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>{item.nombre}</Text>
-                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>{item.cedula}</Text>
-                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#009366', marginBottom: 5 }}>${item.valor}</Text>
+                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#96158C', marginBottom: 5 }}>{item.numeropoliza}</Text>
+                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>{item.name}</Text>
+                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>CC: {item.numero_documento}</Text>
+                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>${item.valorcuota}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
 
             {optionsVisible && <View style={[styles.options, last ? { marginBottom: 10 } : null]}>
                 <Button
-                    onPress={() => console.log('cobro')}
+                    onPress={recaudo}
                     color='white'>
                     COBRO
                     </Button>
                 <Button
-                    onPress={() => console.log('gestion')}
+                    onPress={gestion}
                     color='white'>
                     GESTION
                 </Button>
@@ -45,20 +51,19 @@ const styles = StyleSheet.create({
         zIndex: 999,
         backgroundColor: 'white',
         borderRadius: 7,
-        marginLeft: 20,
-        marginRight: 20,
         marginTop: 15,
-        marginBottom: 10
+        marginBottom: 10,
+        elevation: 2,
+        //marginHorizontal: 20,
     },
     options: {
         flexDirection: 'row-reverse',
         backgroundColor: 'purple',
         borderRadius: 7,
-        marginLeft: 20,
-        marginRight: 20,
         paddingTop: 10,
-        paddingHorizontal: 10,
-        marginTop: -20
+        marginTop: -20,
+        elevation: 2,
+        //marginHorizontal: 20,
     }
 });
 

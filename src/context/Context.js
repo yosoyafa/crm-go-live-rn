@@ -7,15 +7,11 @@ const Context = React.createContext();
 export const Provider = ({ children }) => {
 
     const [logged, setLogged] = useState('0');
-    const [invitado, setInvitado] = useState('0');
-    const [usuario, setUsuario] = useState(null);
-    const [obituario, setObituario] = useState([]);
-    const [planes, setPlanes] = useState([]);
-    const [beneficiarios, setBeneficiarios] = useState([]);
-    const [numeroEmergencia, setNumeroEmergencia] = useState('018000915286');
-
     const [cartera, setCartera] = useState({});
     const [user, setUser] = useState('');
+
+    const [recaudosOffline, setRecaudosOffline] = useState([]);
+    const [gestionesOffline, setGestionesOffline] = useState([]);
 
     const setUp = async () => {
         try {
@@ -26,6 +22,7 @@ export const Provider = ({ children }) => {
         } catch (e) {
             console.warn('error en setUp, logged', e);
         }
+
         try {
             const mUser = await AsyncStorage.getItem('user');
             if (mUser !== null) {
@@ -34,6 +31,7 @@ export const Provider = ({ children }) => {
         } catch (e) {
             console.warn('error en setUp, user', e);
         }
+
         try {
             const mCartera = await AsyncStorage.getItem('cartera');
             if (mCartera !== null) {
@@ -69,6 +67,48 @@ export const Provider = ({ children }) => {
             setCartera(cartera);
         } catch (error) {
             console.warn(`error modificando cartera: ${error}`)
+        }
+    }
+
+    const modifyRecaudosOffline = async recaudos => {
+        try {
+            await AsyncStorage.setItem('recaudosOffline', JSON.stringify(recaudos));
+            setRecaudosOffline(recaudos);
+        } catch (error) {
+            console.warn(`error modificando recaudosOffline: ${error}`)
+        }
+    }
+
+    const getRecaudosOffline = async () => {
+        try {
+            const mRecaudosOffline = await AsyncStorage.getItem('recaudosOffline');
+            if (mRecaudosOffline !== null) {
+                return JSON.parse(mRecaudosOffline);
+            }
+        } catch (e) {
+            console.warn('error en getRecaudosOffline', e);
+            return [];
+        }
+    }
+
+    const modifyGestionesOffline = async gestiones => {
+        try {
+            await AsyncStorage.setItem('gestionesOffline', JSON.stringify(gestiones));
+            setGestionesOffline(gestiones);
+        } catch (error) {
+            console.warn(`error modificando gestionesOffline: ${error}`)
+        }
+    }
+
+    const getGestionesOffline = async () => {
+        try {
+            const mGestionesOffline = await AsyncStorage.getItem('gestionesOffline');
+            if (mGestionesOffline !== null) {
+                return JSON.parse(mGestionesOffline);
+            }
+        } catch (e) {
+            console.warn('error en gestionesOffline', e);
+            return [];
         }
     }
 
@@ -117,6 +157,17 @@ export const Provider = ({ children }) => {
             console.log(json);
         } catch (error) {
             console.error('error en recaudo', error);
+            const recaudo = {
+                lat,
+                lon,
+                cc,
+                valor,
+                fecha,
+                observacion,
+                fdp
+            }
+            const recsOff = recaudosOffline.push(recaudo);
+            modifyRecaudosOffline(recsOff);
         }
     }
 
@@ -126,7 +177,21 @@ export const Provider = ({ children }) => {
             let json = await response.json();
             console.log(json);
         } catch (error) {
-            console.error('error en recaudo', error);
+            console.error('error en gestion', error);
+            const gestion = {
+                lat,
+                lon,
+                cc,
+                tipoGestion,
+                fecha,
+                acuerdo,
+                fechaAcuerdo,
+                valorAcuerdo,
+                descripcion,
+                resultadoGestion
+            }
+            const gestsOff = gestionesOffline.push(gestion);
+            modifyGestionesOffline(gestsOff);
         }
     }
 
@@ -139,6 +204,9 @@ export const Provider = ({ children }) => {
             modifyLogged,
             modifyUser,
             recaudo,
+            gestion,
+            getGestionesOffline,
+            getRecaudosOffline,
             cartera,
             logged,
             user,

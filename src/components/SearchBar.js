@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     input: {
         fontSize: 16,
         flex: 1,
-        color: 'white'
+        color: 'black'
     },
     icon: {
         marginStart: 20,

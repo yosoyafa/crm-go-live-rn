@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SearchBar = props => {
+const SearchBar = ({ term, onChangeText, keyboardType = 'text' }) => {
     return <View style={styles.background}>
         <Icon
             name='search'
@@ -13,9 +13,9 @@ const SearchBar = props => {
         <TextInput
             style={styles.input}
             placeholder='Cédula'
-            value={props.term}
-            onChangeText={props.onChangedTerm}
-            onEndEditing={props.onSubmitTerm}
+            value={term}
+            onChangeText={onChangeText}
+            keyboardType={keyboardType}
         />
     </View>
 };
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
         borderRadius: 90,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginVertical: 10
     },
     input: {
         fontSize: 16,

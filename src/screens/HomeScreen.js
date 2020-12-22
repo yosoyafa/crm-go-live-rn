@@ -1,19 +1,26 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Text, View, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import { IconButton, ActivityIndicator } from 'react-native-paper';
+import { IconButton, ActivityIndicator, Button } from 'react-native-paper';
 
 import Context from '../context/Context';
 import ContratoCard from '../components/ContratoCard';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { downloadCartera, cartera, user, sync } = useContext(Context);
+    const { downloadCartera, cartera, user, sync, findCC, find } = useContext(Context);
 
     const [lista, setLista] = useState(cartera.contratos);
-    const [term, setTerm] = useState('');
+    const [query, setQuery] = useState('');
     const [closeVisible, setCloseVisible] = useState(false);
     const [loading, setLoading] = useState(false);
+
+    const handleSearch = text => {
+        const formattedQuery = text.toLowerCase();
+        const filteredData = cartera.contratos.filter(contrato => String(contrato.numero_documento).startsWith(formattedQuery));
+        setLista(filteredData);
+        setQuery(text);
+    };
 
     useEffect(() => {
         if (cartera) {
@@ -52,54 +59,42 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                 </View>
                 <SearchBar
-                    onChangedTerm={setTerm}
-                    onSubmitTerm={() => {
-                        if (term === '') {
-                            setLista(cartera.contratos);
-                        } else {
-                            setLista(cartera.contratos);
-                            setLista(lista.filter(contrato => contrato.cedula === term));
-                            setCloseVisible(true);
-                        }
-                    }}
+                    term={query}
+                    onChangedText={setQuery}
+                    onChangeText={queryText => handleSearch(queryText)}
+                    keyboardType={'numeric'}
                 />
-                <View style={{ flexDirection: 'row-reverse', marginTop: 10 }}>
-                    {closeVisible && <IconButton
-                        icon='close-circle'
-                        color='#96158C'
-                        size={20}
-                        onPress={() => {
-                            setLista(cartera.contratos);
-                            setCloseVisible(false);
-                            setTerm('');
-                        }}
-                    />}
-                </View>
 
                 {!!lista && !loading ?
                     <>
                         {lista.length !== 0 ?
-                            <>
-                                <Text style={{ textAlign: 'right' }}>{cartera.fecha}</Text>
-                                <FlatList
-                                    data={lista}
-                                    keyExtractor={(item) => item.numeropoliza}
-                                    renderItem={({ item, index, }) => {
-                                        let isLast;
-                                        lista.length === index + 1 ? isLast = true : isLast = false;
-                                        return <ContratoCard
-                                            item={item}
-                                            last={isLast}
-                                            gestion={() => navigation.navigate('Gestion', { contrato: item })}
-                                            recaudo={() => navigation.navigate('Recaudo', { contrato: item })}
-                                            edicion={() => navigation.navigate('Edicion', { contrato: item })}
-                                        />
-                                    }}
-                                />
-                            </>
+                            <FlatList
+                                data={lista}
+                                keyExtractor={(item) => item.numeropoliza}
+                                ListHeaderComponent={<Text style={{ textAlign: 'right', marginTop: 10 }}>{cartera.fecha}</Text>}
+                                renderItem={({ item, index, }) => {
+                                    let isLast;
+                                    lista.length === index + 1 ? isLast = true : isLast = false;
+                                    return <ContratoCard
+                                        item={item}
+                                        last={isLast}
+                                        gestion={() => navigation.navigate('Gestion', { contrato: item })}
+                                        recaudo={() => navigation.navigate('Recaudo', { contrato: item })}
+                                        edicion={() => navigation.navigate('Edicion', { contrato: item })}
+                                    />
+                                }}
+                            />
                             :
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 14, color: 'gray' }} >No se han encontrado resultados para la búsqueda</Text>
+                                <Text style={{ fontSize: 18, color: 'gray', textAlign: 'center', marginBottom: 12 }} >No se han encontrado resultados para la cédula: {query}</Text>
+                                <Button
+                                    icon='cloud-search' 
+                                    mode='contained' 
+                                    onPress={() => {
+                                        findCC(query, user.id)
+                                        .then(!!find.length && setLista(find));
+                                    }}
+                                >Buscar en servidor</Button>
                             </View>
                         }
                     </>

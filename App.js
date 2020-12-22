@@ -72,7 +72,7 @@ const Main = () => {
 
   useEffect(() => {
     setUp();
-  }, [user]);
+  }, []);
 
   return logged === '1' ? <MDrawer /> : <Login />;
 }

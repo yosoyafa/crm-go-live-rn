@@ -9,6 +9,7 @@ export const Provider = ({ children }) => {
     const [logged, setLogged] = useState('0');
     const [cartera, setCartera] = useState({});
     const [user, setUser] = useState('');
+    const [find, setFind] = useState([]);
 
     const [recaudosOffline, setRecaudosOffline] = useState([]);
     const [gestionesOffline, setGestionesOffline] = useState([]);
@@ -151,6 +152,26 @@ export const Provider = ({ children }) => {
         }
     };
 
+    const findCC = async (cc, id) => {
+        try {
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
+            let json = await response.json();
+            if(json){
+                console.log(json)
+                setFind(json);
+            }else{
+                Alert.alert('Error', 'No se encontró la cédula');
+            }
+            //console.log(response);
+            //console.log(json);
+        } catch (error) {
+            console.error('error en findCC', error);
+            Alert.alert('Error', 'No se encontró la cédula')
+        }
+
+    }
+
     const recaudo = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp) => {
         try {
             console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
@@ -225,11 +246,11 @@ export const Provider = ({ children }) => {
             recaudosOffline.forEach((ges) => {
                 gestion(silent, ges.lat, ges.lon, ges.cc, ges.tipoGestion, ges.fecha, ges.acuerdo, ges.fechaAcuerdo, ges.valorAcuerdo, ges.descripcion, ges.resultadoGestion);
             })
-        }else{
+        } else {
             isGes = false;
         }
 
-        if(!isRecs && !isGes && !silent){
+        if (!isRecs && !isGes && !silent) {
             Alert.alert('No hay acciones para sincronizar');
         }
     }
@@ -247,9 +268,11 @@ export const Provider = ({ children }) => {
             getGestionesOffline,
             getRecaudosOffline,
             sync,
+            findCC,
             cartera,
             logged,
             user,
+            find,
         }}>
             {children}
         </Context.Provider>

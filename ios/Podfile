@@ -31,3 +31,4 @@ target 'crmgolive-tvOS' do
     # Pods for testing
   end
 end
+pod 'RNInputMask', :path => '../node_modules/react-native-text-input-mask/ios/InputMask'

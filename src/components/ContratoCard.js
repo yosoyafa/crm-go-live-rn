@@ -34,7 +34,7 @@ const ContratoCard = ({ item, last, gestion, recaudo, edicion }) => {
                 <Button
                     onPress={recaudo}
                     color='white'>
-                    COBRO
+                    RECAUDO
                     </Button>
                 <Button
                     onPress={gestion}

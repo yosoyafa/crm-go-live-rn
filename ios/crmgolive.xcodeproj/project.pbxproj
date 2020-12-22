@@ -15,11 +15,11 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* crmgoliveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* crmgoliveTests.m */; };
-		56BF015544EE10067D754F26 /* libPods-crmgolive-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 462D05F1160797821F9B2827 /* libPods-crmgolive-tvOSTests.a */; };
+		365A49870628AE2BB1A3C449 /* libPods-crmgolive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5F46C93F0C1C1D1B86C507 /* libPods-crmgolive.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		AA3E66B368B16CF867B38701 /* libPods-crmgolive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD3650011E47565037AA0E9 /* libPods-crmgolive.a */; };
-		C559CA20AF33F6373E1E905D /* libPods-crmgolive-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B662F4FE75D672752455729E /* libPods-crmgolive-tvOS.a */; };
-		DC80994823B4DEFEEB74B307 /* libPods-crmgolive-crmgoliveTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D48D43FC937BC4D6251CB9 /* libPods-crmgolive-crmgoliveTests.a */; };
+		A0AF4A37A5CA379DCC5EF9A1 /* libPods-crmgolive-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CFA437EB68C6979CB958ED2 /* libPods-crmgolive-tvOS.a */; };
+		B4489E08385CDB1808399D1D /* libPods-crmgolive-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FEEA6D5DD498E32F19C8D5E /* libPods-crmgolive-tvOSTests.a */; };
+		EC1B7B4567FF21CE012FF081 /* libPods-crmgolive-crmgoliveTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B26D9977E609A3614CFEFA91 /* libPods-crmgolive-crmgoliveTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,29 +44,29 @@
 		00E356EE1AD99517003FC87E /* crmgoliveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = crmgoliveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* crmgoliveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = crmgoliveTests.m; sourceTree = "<group>"; };
-		124B2FAB82741457B70ED466 /* Pods-crmgolive-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOSTests/Pods-crmgolive-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0FEEA6D5DD498E32F19C8D5E /* libPods-crmgolive-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* crmgolive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = crmgolive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = crmgolive/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = crmgolive/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = crmgolive/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = crmgolive/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = crmgolive/main.m; sourceTree = "<group>"; };
-		1CD216AE3ECC865A0B6D30C2 /* Pods-crmgolive-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOS/Pods-crmgolive-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		1B3B7CB870C9C4748C021935 /* Pods-crmgolive-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOSTests/Pods-crmgolive-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* crmgolive-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "crmgolive-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* crmgolive-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "crmgolive-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3295C429861B329F08274DCA /* Pods-crmgolive-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOSTests/Pods-crmgolive-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		462D05F1160797821F9B2827 /* libPods-crmgolive-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		62D48D43FC937BC4D6251CB9 /* libPods-crmgolive-crmgoliveTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-crmgoliveTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		78775C8024B0F43D4D67E95E /* Pods-crmgolive-crmgoliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-crmgoliveTests.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests.release.xcconfig"; sourceTree = "<group>"; };
-		79D0E6A00A3917FDB32A40E3 /* Pods-crmgolive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive.release.xcconfig"; path = "Target Support Files/Pods-crmgolive/Pods-crmgolive.release.xcconfig"; sourceTree = "<group>"; };
-		7F9D00B205CF898E875FF376 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-crmgoliveTests.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5034583545E4085BD5E73B33 /* Pods-crmgolive-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOSTests/Pods-crmgolive-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		63B7E9BD5713A15E9A4BE73C /* Pods-crmgolive-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOS.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOS/Pods-crmgolive-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		64E6FC19A5F8712959D0CDDE /* Pods-crmgolive-crmgoliveTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-crmgoliveTests.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests.release.xcconfig"; sourceTree = "<group>"; };
+		6B13D33E13A7BFFDC6F69EC8 /* Pods-crmgolive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive.release.xcconfig"; path = "Target Support Files/Pods-crmgolive/Pods-crmgolive.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = crmgolive/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8BD3650011E47565037AA0E9 /* libPods-crmgolive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B662F4FE75D672752455729E /* libPods-crmgolive-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D32BEDE8763993AB2699E503 /* Pods-crmgolive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive/Pods-crmgolive.debug.xcconfig"; sourceTree = "<group>"; };
-		E73AAB3BE4A8121D2D84E41A /* Pods-crmgolive-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOS.release.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOS/Pods-crmgolive-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8CFA437EB68C6979CB958ED2 /* libPods-crmgolive-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90DA230C79384A2BF47513B0 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-crmgoliveTests.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A99F98332E62503BA93803B4 /* Pods-crmgolive.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive/Pods-crmgolive.debug.xcconfig"; sourceTree = "<group>"; };
+		AF5F46C93F0C1C1D1B86C507 /* libPods-crmgolive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B26D9977E609A3614CFEFA91 /* libPods-crmgolive-crmgoliveTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-crmgolive-crmgoliveTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F54763F4DEB2847A55D293E5 /* Pods-crmgolive-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crmgolive-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-crmgolive-tvOS/Pods-crmgolive-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC80994823B4DEFEEB74B307 /* libPods-crmgolive-crmgoliveTests.a in Frameworks */,
+				EC1B7B4567FF21CE012FF081 /* libPods-crmgolive-crmgoliveTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA3E66B368B16CF867B38701 /* libPods-crmgolive.a in Frameworks */,
+				365A49870628AE2BB1A3C449 /* libPods-crmgolive.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C559CA20AF33F6373E1E905D /* libPods-crmgolive-tvOS.a in Frameworks */,
+				A0AF4A37A5CA379DCC5EF9A1 /* libPods-crmgolive-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56BF015544EE10067D754F26 /* libPods-crmgolive-tvOSTests.a in Frameworks */,
+				B4489E08385CDB1808399D1D /* libPods-crmgolive-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,33 +136,33 @@
 			name = crmgolive;
 			sourceTree = "<group>";
 		};
-		2B867D27E270222613FC19BC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D32BEDE8763993AB2699E503 /* Pods-crmgolive.debug.xcconfig */,
-				79D0E6A00A3917FDB32A40E3 /* Pods-crmgolive.release.xcconfig */,
-				7F9D00B205CF898E875FF376 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */,
-				78775C8024B0F43D4D67E95E /* Pods-crmgolive-crmgoliveTests.release.xcconfig */,
-				1CD216AE3ECC865A0B6D30C2 /* Pods-crmgolive-tvOS.debug.xcconfig */,
-				E73AAB3BE4A8121D2D84E41A /* Pods-crmgolive-tvOS.release.xcconfig */,
-				124B2FAB82741457B70ED466 /* Pods-crmgolive-tvOSTests.debug.xcconfig */,
-				3295C429861B329F08274DCA /* Pods-crmgolive-tvOSTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				8BD3650011E47565037AA0E9 /* libPods-crmgolive.a */,
-				62D48D43FC937BC4D6251CB9 /* libPods-crmgolive-crmgoliveTests.a */,
-				B662F4FE75D672752455729E /* libPods-crmgolive-tvOS.a */,
-				462D05F1160797821F9B2827 /* libPods-crmgolive-tvOSTests.a */,
+				AF5F46C93F0C1C1D1B86C507 /* libPods-crmgolive.a */,
+				B26D9977E609A3614CFEFA91 /* libPods-crmgolive-crmgoliveTests.a */,
+				8CFA437EB68C6979CB958ED2 /* libPods-crmgolive-tvOS.a */,
+				0FEEA6D5DD498E32F19C8D5E /* libPods-crmgolive-tvOSTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7119C2FA8F04E6165746E91A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A99F98332E62503BA93803B4 /* Pods-crmgolive.debug.xcconfig */,
+				6B13D33E13A7BFFDC6F69EC8 /* Pods-crmgolive.release.xcconfig */,
+				90DA230C79384A2BF47513B0 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */,
+				64E6FC19A5F8712959D0CDDE /* Pods-crmgolive-crmgoliveTests.release.xcconfig */,
+				F54763F4DEB2847A55D293E5 /* Pods-crmgolive-tvOS.debug.xcconfig */,
+				63B7E9BD5713A15E9A4BE73C /* Pods-crmgolive-tvOS.release.xcconfig */,
+				5034583545E4085BD5E73B33 /* Pods-crmgolive-tvOSTests.debug.xcconfig */,
+				1B3B7CB870C9C4748C021935 /* Pods-crmgolive-tvOSTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -180,7 +180,7 @@
 				00E356EF1AD99517003FC87E /* crmgoliveTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				2B867D27E270222613FC19BC /* Pods */,
+				7119C2FA8F04E6165746E91A /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -205,11 +205,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "crmgoliveTests" */;
 			buildPhases = (
-				FC67B853D6A7A381D03010B3 /* [CP] Check Pods Manifest.lock */,
+				D00D3E37380D0677384B7112 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				E80689417EDBE53823464DBC /* [CP] Copy Pods Resources */,
+				C43A900D8E2E621EEBE7955E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,13 +225,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "crmgolive" */;
 			buildPhases = (
-				622E5216AB4EC1AE2426E2FB /* [CP] Check Pods Manifest.lock */,
+				534278CF26F8E8A59CD3D498 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				456A28F78F736E641591CA54 /* [CP] Copy Pods Resources */,
+				ED963E90EEAA6BB6F4C8C768 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,7 +246,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "crmgolive-tvOS" */;
 			buildPhases = (
-				D99EEE50CFD889D3F8ECC8DC /* [CP] Check Pods Manifest.lock */,
+				33D037BE24C60B37905CFA5A /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -266,7 +266,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "crmgolive-tvOSTests" */;
 			buildPhases = (
-				D36ECB51FF81EBC8457A949B /* [CP] Check Pods Manifest.lock */,
+				923A5C365ACD7435D67F63AF /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -391,69 +391,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		456A28F78F736E641591CA54 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-crmgolive/Pods-crmgolive-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-crmgolive/Pods-crmgolive-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		622E5216AB4EC1AE2426E2FB /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-crmgolive-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D36ECB51FF81EBC8457A949B /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-crmgolive-tvOSTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D99EEE50CFD889D3F8ECC8DC /* [CP] Check Pods Manifest.lock */ = {
+		33D037BE24C60B37905CFA5A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -475,17 +413,93 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E80689417EDBE53823464DBC /* [CP] Copy Pods Resources */ = {
+		534278CF26F8E8A59CD3D498 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-crmgolive-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		923A5C365ACD7435D67F63AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-crmgolive-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C43A900D8E2E621EEBE7955E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,7 +507,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-crmgolive-crmgoliveTests/Pods-crmgolive-crmgoliveTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		FC67B853D6A7A381D03010B3 /* [CP] Check Pods Manifest.lock */ = {
+		D00D3E37380D0677384B7112 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -513,6 +527,56 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED963E90EEAA6BB6F4C8C768 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-crmgolive/Pods-crmgolive-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-crmgolive/Pods-crmgolive-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -608,7 +672,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F9D00B205CF898E875FF376 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */;
+			baseConfigurationReference = 90DA230C79384A2BF47513B0 /* Pods-crmgolive-crmgoliveTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -631,7 +695,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 78775C8024B0F43D4D67E95E /* Pods-crmgolive-crmgoliveTests.release.xcconfig */;
+			baseConfigurationReference = 64E6FC19A5F8712959D0CDDE /* Pods-crmgolive-crmgoliveTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -651,7 +715,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D32BEDE8763993AB2699E503 /* Pods-crmgolive.debug.xcconfig */;
+			baseConfigurationReference = A99F98332E62503BA93803B4 /* Pods-crmgolive.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -674,7 +738,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79D0E6A00A3917FDB32A40E3 /* Pods-crmgolive.release.xcconfig */;
+			baseConfigurationReference = 6B13D33E13A7BFFDC6F69EC8 /* Pods-crmgolive.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -695,7 +759,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CD216AE3ECC865A0B6D30C2 /* Pods-crmgolive-tvOS.debug.xcconfig */;
+			baseConfigurationReference = F54763F4DEB2847A55D293E5 /* Pods-crmgolive-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -723,7 +787,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E73AAB3BE4A8121D2D84E41A /* Pods-crmgolive-tvOS.release.xcconfig */;
+			baseConfigurationReference = 63B7E9BD5713A15E9A4BE73C /* Pods-crmgolive-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -751,7 +815,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 124B2FAB82741457B70ED466 /* Pods-crmgolive-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 5034583545E4085BD5E73B33 /* Pods-crmgolive-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -778,7 +842,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3295C429861B329F08274DCA /* Pods-crmgolive-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = 1B3B7CB870C9C4748C021935 /* Pods-crmgolive-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

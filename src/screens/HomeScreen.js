@@ -8,7 +8,7 @@ import ContratoCard from '../components/ContratoCard';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { downloadCartera, cartera, user } = useContext(Context);
+    const { downloadCartera, cartera, user, sync } = useContext(Context);
 
     const [lista, setLista] = useState(cartera.contratos);
     const [term, setTerm] = useState('');
@@ -47,7 +47,7 @@ const HomeScreen = ({ navigation }) => {
                         <IconButton
                             icon="sync"
                             size={30}
-                            onPress={() => console.log('Pressed')}
+                            onPress={() => sync(false)}
                         />
                     </View>
                 </View>

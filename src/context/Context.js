@@ -135,6 +135,7 @@ export const Provider = ({ children }) => {
     const downloadCartera = async (id) => {
         if (id) {
             try {
+                console.log(`https://ws.crmolivosvillavicencio.com/app/getCartera1.php?user_id=${id}`);
                 let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getCartera1.php?user_id=${id}`);
                 console.log(response);
                 let json = await response.json();
@@ -150,11 +151,16 @@ export const Provider = ({ children }) => {
         }
     };
 
-    const recaudo = async (lat, lon, cc, valor, fecha, observacion, fdp) => {
+    const recaudo = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp) => {
         try {
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
             let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`);
             let json = await response.json();
-            console.log(json);
+            if (json.estado === 'successful') {
+                Alert.alert('Éxito', 'Recaudo exitoso');
+            } else {
+                Alert.alert('Error', 'Recaudo fallido');
+            }
         } catch (error) {
             console.error('error en recaudo', error);
             const recaudo = {
@@ -168,14 +174,21 @@ export const Provider = ({ children }) => {
             }
             const recsOff = recaudosOffline.push(recaudo);
             modifyRecaudosOffline(recsOff);
+            if (!silent) {
+                Alert.alert('Recaudo offline exitoso');
+            }
         }
     }
 
-    const gestion = async (lat, lon, cc, tipoGestion, fecha, acuerdo, fechaAcuerdo, valorAcuerdo, descripcion, resultadoGestion) => {
+    const gestion = async (silent = false, lat, lon, cc, tipoGestion, fecha, acuerdo, fechaAcuerdo, valorAcuerdo, descripcion, resultadoGestion) => {
         try {
             let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fechaAcuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}`);
             let json = await response.json();
-            console.log(json);
+            if (json.estado === 'successful') {
+                Alert.alert('Éxito', 'Gestión exitosa');
+            } else {
+                Alert.alert('Error', 'Gestión fallida');
+            }
         } catch (error) {
             console.error('error en gestion', error);
             const gestion = {
@@ -192,6 +205,32 @@ export const Provider = ({ children }) => {
             }
             const gestsOff = gestionesOffline.push(gestion);
             modifyGestionesOffline(gestsOff);
+            if (!silent) {
+                Alert.alert('Gestion offline exitosa');
+            }
+        }
+    }
+
+    const sync = async (silent = false) => {
+        let isRecs = true;
+        let isGes = true;
+        if (recaudosOffline.length !== 0) {
+            recaudosOffline.forEach((rec) => {
+                recaudo(silent, rec.lat, rec.lon, rec.cc, rec.valor, rec.fecha, rec.observacion, rec.fdp);
+            })
+        } else {
+            isRecs = false;
+        }
+        if (gestionesOffline.length !== 0) {
+            recaudosOffline.forEach((ges) => {
+                gestion(silent, ges.lat, ges.lon, ges.cc, ges.tipoGestion, ges.fecha, ges.acuerdo, ges.fechaAcuerdo, ges.valorAcuerdo, ges.descripcion, ges.resultadoGestion);
+            })
+        }else{
+            isGes = false;
+        }
+
+        if(!isRecs && !isGes && !silent){
+            Alert.alert('No hay acciones para sincronizar');
         }
     }
 
@@ -207,6 +246,7 @@ export const Provider = ({ children }) => {
             gestion,
             getGestionesOffline,
             getRecaudosOffline,
+            sync,
             cartera,
             logged,
             user,

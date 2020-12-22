@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, Picker, Switch, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { Text, View, StyleSheet, Picker, Switch, SafeAreaView, ScrollView, Modal, ActivityIndicator, Platform } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { IconButton, Button } from 'react-native-paper';
 import TextInputMask from 'react-native-text-input-mask';
+import Geolocation from '@react-native-community/geolocation';
+
+import Context from '../context/Context';
 
 const GestionScreen = ({ navigation, route }) => {
 
+    const { gestion } = useContext(Context);
+
     const { contrato } = route.params;
 
-    const [selectedValue, setSelectedValue] = useState("java");
-    const [text, setText] = useState('');
+    const [selectedValue, setSelectedValue] = useState('');
+    const [description, setDescription] = useState('');
     const [valor, setValor] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [pos, setPos] = useState({ lat: 0, lon: 0 });
 
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -73,8 +80,8 @@ const GestionScreen = ({ navigation, route }) => {
                         style={{ marginBottom: 20 }}
                         multiline={true}
                         numberOfLines={4}
-                        onChangeText={(text) => setText(text)}
-                        value={text}
+                        onChangeText={(text) => setDescription(text)}
+                        value={description}
                         label='Descripción'
                         mode='outlined'
                     />
@@ -142,11 +149,24 @@ const GestionScreen = ({ navigation, route }) => {
                         }}
                         icon="content-save"
                         mode="contained"
-                        onPress={() => console.log('Pressed')}>
+                        onPress={() => {
+                            setLoading(true);
+                            Geolocation.getCurrentPosition(info => setPos({ lat: info?.coords?.latitude, lon: info?.coords?.longitude }));
+                            const today = new Date();
+                            gestion(false, pos.lat, pos.lon, contrato.numero_documento, 'GestionAPP', `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`, isEnabled ? '1' : '0', payDate, valor, description, selectedValue)
+                                .then(() => setLoading(false));
+                        }}>
                         Guardar
                     </Button>
                 </View>
             </ScrollView>
+            <Modal transparent visible={loading}>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000000aa' }}>
+                    <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 8 }}>
+                        <ActivityIndicator size="large" color="#96158C" />
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 };

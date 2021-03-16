@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, SafeAreaView, StyleSheet } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import Geolocation from '@react-native-community/geolocation';
@@ -17,18 +17,19 @@ const LoginScreen = () => {
     const mLogin = () => {
         Geolocation.getCurrentPosition(info => setPos({ lat: info?.coords?.latitude, lon: info?.coords?.longitude }));
         const today = new Date();
-        login(user.toLowerCase(), md5(password), pos.lat, pos.lon, `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`);
+        login(user.toLowerCase(), md5(password), pos.lat, pos.lon, `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`);
     }
-
-    useEffect(() => {
-        Geolocation.getCurrentPosition(info => { setPos({ lat: info.coords.latitude, lon: info.coords.longitude }) });
-    }, []);
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ flex: 1, padding: 20, justifyContent: 'center' }}>
                 <View style={{ marginBottom: 32 }}>
                     <TextInput
+                        theme={{
+                            colors: {
+                                primary: '#96158C',
+                            }
+                        }}
                         style={{ marginBottom: 16 }}
                         label="Usuario"
                         value={user}
@@ -36,6 +37,11 @@ const LoginScreen = () => {
                         onChangeText={text => setUser(text)}
                     />
                     <TextInput
+                        theme={{
+                            colors: {
+                                primary: '#96158C',
+                            }
+                        }}
                         secureTextEntry
                         label="Contraseña"
                         value={password}
@@ -44,6 +50,11 @@ const LoginScreen = () => {
                     />
                 </View>
                 <Button
+                    theme={{
+                        colors: {
+                            primary: '#96158C',
+                        }
+                    }}
                     onPress={mLogin}
                     disabled={!user || !password}
                     mode='contained'

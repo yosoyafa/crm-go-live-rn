@@ -13,6 +13,7 @@ import GestionScreen from './src/screens/GestionScreen';
 import RecaudoScreen from './src/screens/RecaudoScreen';
 import EdicionScreen from './src/screens/EdicionScreen';
 import HistoryScreen from './src/screens/HistoryScreen';
+import BluetoothScreen from './src/screens/BluetoothScreen';
 
 import DrawerContent from './src/components/DrawerContent';
 
@@ -53,15 +54,27 @@ const Login = () => {
 }
 
 const MDrawer = () => {
-  const { user, cartera, downloadCartera } = useContext(Context);
+  const { user, cartera, history, downloadCartera, getHistory, getParametrosGestion, getParametrosRecaudo, parametrosRecaudo, parametrosGestion } = useContext(Context);
 
   useEffect(() => {
-    if (Object.keys(cartera).length == 0) downloadCartera(user.id);
+    if (Object.keys(cartera).length == 0) {
+      downloadCartera(user.id);
+    };
+    if (Object.keys(history).length == 0) {
+      getHistory(user.id);
+    };
+    if (Object.keys(parametrosRecaudo).length == 0) {
+      getParametrosRecaudo();
+    }
+    if (Object.keys(parametrosGestion).length == 0) {
+      getParametrosGestion();
+    }
   }, [user]);
 
   return (
     <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />} drawerContentOptions={{ activeTintColor: 'purple', }}>
-      <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name='Cartera' component={HomeStack} />
+      <Drawer.Screen name='Historial' component={HistoryScreen} />
     </Drawer.Navigator>
   );
 

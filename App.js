@@ -57,18 +57,21 @@ const MDrawer = () => {
   const { user, cartera, history, downloadCartera, getHistory, getParametrosGestion, getParametrosRecaudo, parametrosRecaudo, parametrosGestion } = useContext(Context);
 
   useEffect(() => {
-    if (Object.keys(cartera).length == 0) {
-      downloadCartera(user.id);
+    const start = async () => {
+      if (Object.keys(cartera).length == 0) {
+        await downloadCartera(user.id);
+      };
+      if (Object.keys(history).length == 0) {
+        await getHistory(user.id);
+      };
+      if (Object.keys(parametrosRecaudo).length == 0) {
+        await getParametrosRecaudo();
+      }
+      if (Object.keys(parametrosGestion).length == 0) {
+        await getParametrosGestion();
+      }
     };
-    if (Object.keys(history).length == 0) {
-      getHistory(user.id);
-    };
-    if (Object.keys(parametrosRecaudo).length == 0) {
-      getParametrosRecaudo();
-    }
-    if (Object.keys(parametrosGestion).length == 0) {
-      getParametrosGestion();
-    }
+    start();
   }, [user]);
 
   return (

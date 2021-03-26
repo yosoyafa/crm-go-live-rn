@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 
@@ -103,6 +104,8 @@ export const Provider = ({ children }) => {
         } catch (e) {
             console.warn('error en setUp, parametrosGestion', e);
         }
+
+        SplashScreen.hide();
     };
 
     const modifyUser = async value => {

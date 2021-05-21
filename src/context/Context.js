@@ -108,6 +108,8 @@ export const Provider = ({ children }) => {
         SplashScreen.hide();
     };
 
+    //STORAGE
+
     const modifyUser = async value => {
         try {
             const jsonValue = JSON.stringify(value)
@@ -172,18 +174,6 @@ export const Provider = ({ children }) => {
         }
     };
 
-    const getRecaudosOffline = async () => {
-        try {
-            const mRecaudosOffline = await AsyncStorage.getItem('recaudosOffline');
-            if (mRecaudosOffline !== null) {
-                return JSON.parse(mRecaudosOffline);
-            }
-        } catch (e) {
-            console.warn('error en getRecaudosOffline', e);
-            return [];
-        }
-    };
-
     const modifyGestionesOffline = async gestiones => {
         try {
             await AsyncStorage.setItem('gestionesOffline', JSON.stringify(gestiones));
@@ -225,6 +215,20 @@ export const Provider = ({ children }) => {
             return [];
         }
     };
+
+    const getRecaudosOffline = async () => {
+        try {
+            const mRecaudosOffline = await AsyncStorage.getItem('recaudosOffline');
+            if (mRecaudosOffline !== null) {
+                return JSON.parse(mRecaudosOffline);
+            }
+        } catch (e) {
+            console.warn('error en getRecaudosOffline', e);
+            return [];
+        }
+    };
+
+    //API CALLS
 
     const login = async (user, md5, lat, lon, fecha) => {
         try {
@@ -313,8 +317,8 @@ export const Provider = ({ children }) => {
 
     const recaudoOffline = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`);
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Recaudo exitoso');
@@ -354,8 +358,8 @@ export const Provider = ({ children }) => {
 
     const recaudo = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`);
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Recaudo exitoso');
@@ -395,8 +399,8 @@ export const Provider = ({ children }) => {
 
     const gestion = async (silent = false, lat, lon, cc, tipoGestion, fecha, acuerdo, fechaAcuerdo, valorAcuerdo, descripcion, resultadoGestion, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}`);
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Gestión exitosa');
@@ -439,8 +443,8 @@ export const Provider = ({ children }) => {
 
     const edicion = async (silent = false, lat, lon, cc, fecha, tel1viejo, tel1nuevo, tel2viejo, tel2nuevo, direccionVieja, direccionNueva, barrioViejo, barrioNuevo, indicacionVieja, indicacionNueva, diaCobroViejo, diaCobroNuevo, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}`);
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
             let json = await response.json();
             //console.log(json);
             if (json.estado === 'successful') {
@@ -485,6 +489,8 @@ export const Provider = ({ children }) => {
             return false;
         }
     };
+
+    //SYNC
 
     const sync = async (silent = false) => {
         let isRecs = true;

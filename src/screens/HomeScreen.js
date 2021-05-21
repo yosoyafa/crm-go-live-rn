@@ -9,12 +9,22 @@ import MenuBar from '../components/MenuBar';
 
 const HomeScreen = ({ navigation }) => {
 
-    const { downloadCartera, cartera, user, sync, findCC, find } = useContext(Context);
+    const { downloadCartera, cartera, user, sync, findCC, find, gestionesOffline, recaudosOffline, edicionesOffline, } = useContext(Context);
 
     const [lista, setLista] = useState(cartera.contratos);
     const [query, setQuery] = useState('');
     const [loading, setLoading] = useState(false);
     const [loadingModal, setLoadingModal] = useState(false);
+
+    const [openCard, setOpenCardState] = useState('');
+
+    const setOpenCard = (id) => {
+        if (openCard === id) {
+            setOpenCardState('');
+        } else {
+            setOpenCardState(id);
+        }
+    };
 
     const handleSearch = text => {
         const formattedQuery = text.toLowerCase();
@@ -32,6 +42,7 @@ const HomeScreen = ({ navigation }) => {
     const menuBarItems = [
         {
             name: 'cloud-download',
+            visible: true,
             onPress: async () => {
                 setLoading(true);
                 downloadCartera(user.id).then(
@@ -44,6 +55,7 @@ const HomeScreen = ({ navigation }) => {
         },
         {
             name: 'sync',
+            visible: (gestionesOffline.length || recaudosOffline.length || edicionesOffline.length),
             onPress: async () => {
                 setLoadingModal(true);
                 await sync(false);
@@ -82,13 +94,17 @@ const HomeScreen = ({ navigation }) => {
                                 renderItem={({ item, index, }) => {
                                     let isLast;
                                     lista.length === index + 1 ? isLast = true : isLast = false;
-                                    return <ContratoCard
-                                        item={item}
-                                        last={isLast}
-                                        gestion={() => navigation.navigate('Gestion', { contrato: item })}
-                                        recaudo={() => navigation.navigate('Recaudo', { contrato: item })}
-                                        edicion={() => navigation.navigate('Edicion', { contrato: item })}
-                                    />
+                                    return (
+                                        <ContratoCard
+                                            item={item}
+                                            last={isLast}
+                                            optionsVisible={item.numeropoliza === openCard}
+                                            setOptionsVisible={setOpenCard}
+                                            gestion={() => navigation.navigate('Gestion', { contrato: item })}
+                                            recaudo={() => navigation.navigate('Recaudo', { contrato: item })}
+                                            edicion={() => navigation.navigate('Edicion', { contrato: item })}
+                                        />
+                                    )
                                 }}
                             />
                             :

@@ -311,6 +311,47 @@ export const Provider = ({ children }) => {
         }
     };
 
+    const recaudoOffline = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
+        try {
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`);
+            let json = await response.json();
+            if (json.estado === 'successful') {
+                if (!isSync) Alert.alert('Éxito', 'Recaudo exitoso');
+                return { result: true, rc: json.NumeroRecibo };
+            } else {
+                if (!isSync) Alert.alert('Error', 'Recaudo fallido');
+                return { result: true, rc: `${user.iniciales_numerador} ${user.numerador_rc_manual} (manual)` };
+            }
+        } catch (error) {
+            setUser({ ...user, numerador_rc_manual: +user.numerador_rc_manual++ })
+            modifyUser(user);
+            console.error('error en recaudo', error);
+            if (!isSync) {
+                const recaudo = {
+                    id: recaudosOffline.length,
+                    lat,
+                    lon,
+                    cc,
+                    valor,
+                    fecha,
+                    observacion,
+                    fdp
+                }
+                const recsOff = [];
+                recsOff.push(recaudo);
+                const joint = recaudosOffline.concat(recsOff);
+                setRecaudosOffline(joint);
+                modifyRecaudosOffline(joint);
+                if (!silent) {
+                    Alert.alert('Recaudo offline exitoso');
+                }
+                return { result: true, rc: `${user.iniciales_numerador} ${user.numerador_rc_manual} (manual)` };
+            }
+            return { result: false, rc: `${user.iniciales_numerador} ${user.numerador_rc_manual} (manual)` };
+        }
+    };
+
     const recaudo = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
         try {
             console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}`)
@@ -401,7 +442,7 @@ export const Provider = ({ children }) => {
             console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}`);
             let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}`);
             let json = await response.json();
-            console.log(json);
+            //console.log(json);
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Edición de datos exitosa');
                 return true;
@@ -454,13 +495,13 @@ export const Provider = ({ children }) => {
         const promisesGestion = gestionesOffline.map(g => syncGestion(g));
         const promisesEdicion = edicionesOffline.map(e => syncEdicion(e));
 
-        await Promise.all(promisesRecaudo).then(
-            async () => await Promise.all(promisesGestion)).then(
-                async () => await Promise.all(promisesEdicion)
-            );
-
+        await Promise.all(promisesRecaudo);
         await cleanRecs();
+
+        await Promise.all(promisesGestion);
         await cleanGes();
+
+        await Promise.all(promisesEdicion);
         await cleanEdi();
 
         if (!isRecs && !isGes && !isEdi && !silent) {
@@ -469,16 +510,16 @@ export const Provider = ({ children }) => {
         };
 
         if ((recaudosOffline.length === 0) && (gestionesOffline.length === 0) && (edicionesOffline.length === 0)) {
-            if (!silent) Alert.alert('Sincronización completa');
+            //if (!silent) Alert.alert('Sincronización completa');
             return true;
         } else {
-            if (!silent) Alert.alert('No se pudo completar la sincronización', `Recaudos: ${recaudosOffline.length}\nGestiones: ${gestionesOffline.length}\nEdiciones: ${edicionesOffline.length}`);
+            //if (!silent) Alert.alert('No se pudo completar la sincronización', `Recaudos: ${recaudosOffline.length}\nGestiones: ${gestionesOffline.length}\nEdiciones: ${edicionesOffline.length}`);
             return false;
         }
     };
 
     const syncRecaudo = async rec => {
-        await recaudo(true, rec.lat, rec.lon, rec.cc, rec.valor, rec.fecha, rec.observacion, rec.fdp, true).then(async ({ result }) => {
+        await recaudoOffline(true, rec.lat, rec.lon, rec.cc, rec.valor, rec.fecha, rec.observacion, rec.fdp, true).then(async ({ result }) => {
             if (!!result) {
                 const aux = syncedRecIds;
                 aux.push(rec.id);

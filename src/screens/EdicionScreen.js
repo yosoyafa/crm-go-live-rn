@@ -1,12 +1,15 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, StyleSheet, ScrollView, SafeAreaView, Picker, Modal, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { Button, TextInput } from 'react-native-paper';
+
+import moment from 'moment';
+import call from 'react-native-phone-call'
+
+import Context from '../context/Context';
+
 import direcciones from '../static/direcciones';
 import Geolocation from '@react-native-community/geolocation';
 import AutocompleteInput from '../components/AutocompleteInput';
-import moment from 'moment';
-
-import Context from '../context/Context';
 
 const EdicionScreen = ({ navigation, route }) => {
 
@@ -40,6 +43,15 @@ const EdicionScreen = ({ navigation, route }) => {
 
     const isDiaCobroValid = () => !(!!diaCobro && !(+diaCobro > 0 && +diaCobro < 32));
 
+    const makeCall = number => {
+        const args = {
+            number, // String value with the number to call
+            prompt: false // Optional boolean property. Determines if the user should be prompt prior to the call 
+        }
+
+        call(args).catch(console.error)
+    };
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
@@ -49,8 +61,8 @@ const EdicionScreen = ({ navigation, route }) => {
                     <Text>Dirección: {contrato.direccion}</Text>
                     <Text>Barrio: {contrato.barrio}</Text>
                     <Text>Indicaciones: {contrato.indicaciones}</Text>
-                    <Text>Teléfono 1: {contrato.celular1}</Text>
-                    <Text>Teléfono 2: {contrato.celular2}</Text>
+                    <Text onPress={() => { makeCall(contrato.celular1) }}>Teléfono 1: {contrato.celular1}</Text>
+                    <Text onPress={() => { makeCall(contrato.celular2) }}>Teléfono 2: {contrato.celular2}</Text>
                     <Text>Dia de cobro: {contrato.dia_cobro}</Text>
                     <View style={{ borderRadius: 4, borderWidth: 1, borderColor: 'grey', marginVertical: 20, padding: 10 }}>
                         <Text style={{ marginTop: -21, marginBottom: 10, backgroundColor: '#F2F2F2', width: 80, paddingHorizontal: 10 }}>Direccion</Text>

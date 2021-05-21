@@ -1,87 +1,12 @@
 import 'react-native-gesture-handler';
 import React, { useContext, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from '@react-navigation/stack';
+import codePush from 'react-native-code-push';
+import * as Sentry from "@sentry/react-native";
+
 import Context, { Provider } from './src/context/Context';
 
-import LoginScreen from './src/screens/LoginScreen';
-import HomeScreen from './src/screens/HomeScreen';
-import GestionScreen from './src/screens/GestionScreen';
-import RecaudoScreen from './src/screens/RecaudoScreen';
-import EdicionScreen from './src/screens/EdicionScreen';
-import HistoryScreen from './src/screens/HistoryScreen';
-import BluetoothScreen from './src/screens/BluetoothScreen';
-
-import DrawerContent from './src/components/DrawerContent';
-
-const Tab = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
-
-const HomeStack = () => {
-  return <Stack.Navigator>
-    <Stack.Screen
-      name="Home"
-      component={HomeScreen}
-      options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name="Recaudo"
-      component={RecaudoScreen}
-    />
-    <Stack.Screen
-      name="Gestion"
-      component={GestionScreen}
-    />
-    <Stack.Screen
-      name="Edicion"
-      component={EdicionScreen}
-    />
-  </Stack.Navigator>
-}
-
-const Login = () => {
-  return <Stack.Navigator>
-    <Stack.Screen
-      name="Login"
-      component={LoginScreen}
-      options={{ headerShown: false }}
-    />
-  </Stack.Navigator>
-}
-
-const MDrawer = () => {
-  const { user, cartera, history, downloadCartera, getHistory, getParametrosGestion, getParametrosRecaudo, parametrosRecaudo, parametrosGestion } = useContext(Context);
-
-  useEffect(() => {
-    const start = async () => {
-      if (Object.keys(cartera).length == 0) {
-        await downloadCartera(user.id);
-      };
-      if (Object.keys(history).length == 0) {
-        await getHistory(user.id);
-      };
-      if (Object.keys(parametrosRecaudo).length == 0) {
-        await getParametrosRecaudo();
-      }
-      if (Object.keys(parametrosGestion).length == 0) {
-        await getParametrosGestion();
-      }
-    };
-    start();
-  }, [user]);
-
-  return (
-    <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />} drawerContentOptions={{ activeTintColor: 'purple', }}>
-      <Drawer.Screen name='Cartera' component={HomeStack} />
-      <Drawer.Screen name='Historial' component={HistoryScreen} />
-    </Drawer.Navigator>
-  );
-
-}
+import { MainDrawer, LoginStack } from './src/navigation';
 
 const Main = () => {
   const { logged, setUp, user } = useContext(Context);
@@ -90,11 +15,13 @@ const Main = () => {
     setUp();
   }, []);
 
-  return logged === '1' ? <MDrawer /> : <Login />;
+  return logged === '1' ? <MainDrawer /> : <LoginStack />;
 }
 
 const App = () => {
-
+  Sentry.init({
+    dsn: "https://486bef2bb735421d8e159d6fc4a6f86b@o654474.ingest.sentry.io/5762178",
+  });
   return (
     <Provider>
       <NavigationContainer>
@@ -104,6 +31,6 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
-export default App;
+export default codePush(codePushOptions)(App);

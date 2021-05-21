@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native-paper';
 
-const HistoryCard = ({ recibo, type }) => {
-    return (
+const HistoryCard = ({ recibo, type, last, optionsVisible, setOptionsVisible, print }) => {
+    return (<View>
         <View style={styles.card} >
-            <View style={{ flex: 1, margin: 10 }} onPress={() => console.log(1)}>
+            <TouchableOpacity style={{ flex: 1, margin: 10 }} onPress={() => { setOptionsVisible(type === 'gestion' ? recibo.name : recibo.numerorecibo) }}>
                 <View style={{ flex: 1, margin: 5 }}>
                     {type === 'recaudo' ?
                         <>
@@ -28,9 +29,21 @@ const HistoryCard = ({ recibo, type }) => {
                         </>
                     }
                 </View>
-            </View>
+            </TouchableOpacity>
         </View>
-    );
+        {
+            optionsVisible && <View style={{ ...styles.options, marginBottom: last ? 10 : 0 }}>
+                <Button
+                    onPress={() => {
+                        //console.log(recibo);
+                        print()
+                    }}
+                    color='white'>
+                    IMPRIMIR
+        </Button>
+            </View>
+        }
+    </View >);
 }
 
 const styles = StyleSheet.create({

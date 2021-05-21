@@ -1,17 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { Button, IconButton } from 'react-native-paper';
 
-const ContratoCard = ({ item, last, gestion, recaudo, edicion }) => {
-
-    const [optionsVisible, setOptionsVisible] = useState(false);
+const ContratoCard = ({ item, last, gestion, recaudo, edicion, optionsVisible, setOptionsVisible }) => {
 
     return (
-        /*  contrato: '9991',
-            nombre: 'cliente 1',
-            cedula: '123',
-            valor: '123'
-        */
         <View style={{ flex: 1 }}>
             <View style={styles.card} >
                 <IconButton
@@ -20,12 +13,12 @@ const ContratoCard = ({ item, last, gestion, recaudo, edicion }) => {
                     size={25}
                     onPress={edicion}
                 />
-                <TouchableOpacity style={{ flex: 1, margin: 10 }} onPress={() => { setOptionsVisible(!optionsVisible) }}>
+                <TouchableOpacity style={{ flex: 1, margin: 10 }} onPress={() => { setOptionsVisible(item.numeropoliza) }}>
                     <View style={{ flex: 1, margin: 5 }}>
                         <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#96158C', marginBottom: 5 }}>{item.numeropoliza}</Text>
                         <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>{item.name}</Text>
                         <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>CC: {item.numero_documento}</Text>
-                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>${item.valorcuota}</Text>
+                        <Text numberOfLines={1} style={{ fontWeight: 'bold', fontSize: 16, color: '#000', marginBottom: 5 }}>${item.totalcartera}</Text>
                     </View>
                 </TouchableOpacity>
             </View>

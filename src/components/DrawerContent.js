@@ -159,14 +159,14 @@ const DrawerContent = (props) => {
                             <View style={{ borderRadius: 90, height: 10, width: 10, backgroundColor: !!name ? 'green' : 'red' }}></View>
                             <Text style={{ marginLeft: 8 }}>{!!name ? name : 'Desconectado'}</Text>
                         </View>
-                        {!scanning ?
+                        {/*!scanning ?
                             <Text
                                 style={{ color: '#96158C', fontWeight: 'bold' }}
                                 onPress={() => scan()}
                             >ESCANEAR</Text>
                             :
                             <ActivityIndicator size={18} color={'#96158C'} />
-                        }
+                        */}
                     </View>
                     <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }} onPress={() => setPairedVisible(!pairedVisible)}>
                         <Text style={{ fontWeight: 'bold', marginBottom: 8 }}>Dispositivos emparejados</Text>

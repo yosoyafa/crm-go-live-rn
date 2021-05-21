@@ -11,7 +11,7 @@ const MenuBar = ({ menuOnPress, buttons = [] }) => {
                 onPress={menuOnPress}
             />
             <View style={{ flexDirection: 'row' }}>
-                {buttons.map((button, i) => {
+                {buttons.filter(el => el.visible).map((button, i) => {
                     return (
                         <IconButton
                             key={i}

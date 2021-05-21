@@ -232,7 +232,7 @@ export const Provider = ({ children }) => {
 
     const login = async (user, md5, lat, lon, fecha) => {
         try {
-            let response = await fetch(`https://integracionip.com/app/getUser.php?user_name=${user}&latitud=${lat}&longitud=${lon}&fecha=${fecha}`);
+            let response = await fetch(`https://integracionip.com/app/getUser.php?user_name=${user}&latitud=${lat}&longitud=${lon}&fecha=${fecha}&nueva=${1}`);
             let resp = await response.json();
             if (resp.user_name !== 'Usuario NO Autorizado para APP' && md5 === resp.user_hash) {
                 modifyLogged('1');

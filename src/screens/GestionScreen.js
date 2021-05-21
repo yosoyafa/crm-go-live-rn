@@ -6,9 +6,9 @@ import { IconButton, Button } from 'react-native-paper';
 import TextInputMask from 'react-native-text-input-mask';
 import Geolocation from '@react-native-community/geolocation';
 import moment from 'moment';
-import { BluetoothEscposPrinter } from 'react-native-bluetooth-escpos-printer';
 
 import Context from '../context/Context';
+import { createTicketGestion, print } from '../utils/tools';
 
 const GestionScreen = ({ navigation, route }) => {
 
@@ -58,52 +58,16 @@ const GestionScreen = ({ navigation, route }) => {
     };
 
     const isDisabled = () => {
+        if (!!numeroRecibo) {
+            //console.log(numeroRecibo)
+            return true;
+        }
         if (isEnabled) {
             return !(description && valor && payDate);
         } else {
             return !description;
         }
     };
-
-    const createTicket = () => `
-${!!parametrosGestion[0]?.valorparametro ? parametrosGestion[0]?.valorparametro : ''}
-${!!parametrosGestion[1]?.valorparametro ? parametrosGestion[1]?.valorparametro : ''}
-Fecha: ${moment().format('DD-MM-YYYY HH:mm:ss')}
-
-Vigencia desde: ${contrato.vigenciadesde}
-Vigencia hasta: ${contrato.vigenciahasta}
-Valor vig. contrato: $${contrato.valorcontrato}
-Periodicidad pago: ${contrato.periodicidad1}
-
---------------------------------------
-${!!parametrosGestion[2]?.valorparametro ? parametrosGestion[2]?.valorparametro : ''}
-${numeroRecibo}
-Contrato Nro: ${contrato.numeropoliza}
-${contrato.name}
-Dto: ${contrato.numero_documento}
-Observaciones: ${description}
---------------------------------------
-
-
-
-  ----------------------------------
-  ${contrato.name}
-
-
-
-${!!parametrosGestion[3]?.valorparametro ? parametrosGestion[3]?.valorparametro : ''}
-${!!parametrosGestion[4]?.valorparametro ? parametrosGestion[4]?.valorparametro : ''}
-${!!parametrosGestion[5]?.valorparametro ? parametrosGestion[5]?.valorparametro : ''}
-${!!parametrosGestion[6]?.valorparametro ? parametrosGestion[6]?.valorparametro : ''}
-${!!parametrosGestion[7]?.valorparametro ? parametrosGestion[7]?.valorparametro : ''}
-
-
-
-
-
-
-
-`;
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -207,15 +171,8 @@ ${!!parametrosGestion[7]?.valorparametro ? parametrosGestion[7]?.valorparametro 
                                     primary: '#96158C',
                                 }
                             }}
-                            onPress={async () => {
-                                try {
-                                    await BluetoothEscposPrinter.printerInit();
-                                    await BluetoothEscposPrinter.printText(createTicket(), {});
-                                } catch (e) {
-                                    console.log(e);
-                                    Alert.alert('Error en impresión', 'Revisa tu conexión con la impresora');
-                                }
-                            }}>
+                            onPress={() => print(createTicketGestion(contrato, numeroRecibo, description, parametrosGestion))}
+                        >
                             Imprimir
                         </Button>
                         <Button
@@ -236,7 +193,8 @@ ${!!parametrosGestion[7]?.valorparametro ? parametrosGestion[7]?.valorparametro 
                                     .then(
                                         (out) => {
                                             setLoading(false);
-                                            setNumeroRecibo(out.rc)
+                                            setNumeroRecibo(out.rc);
+
                                         }
                                     );
                             }}>

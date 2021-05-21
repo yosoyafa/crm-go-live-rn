@@ -5,14 +5,18 @@ import TextInputMask from 'react-native-text-input-mask';
 import Geolocation from '@react-native-community/geolocation';
 
 import Context from '../context/Context';
+import { createTicketRecaudo, print } from '../utils/tools';
+
 import moment from 'moment';
-import { BluetoothEscposPrinter } from 'react-native-bluetooth-escpos-printer';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 const RecaudoScreen = ({ navigation, route }) => {
+
 
     const { recaudo, bleOpened, parametrosRecaudo } = useContext(Context);
 
     const { contrato } = route.params;
+    //console.log(contrato)
 
     const [valor, setValor] = useState('');
     const [description, setDescription] = useState('');
@@ -20,42 +24,10 @@ const RecaudoScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false);
     const [numeroRecibo, setNumeroRecibo] = useState('');
 
-    const createTicket = () => `
-${!!parametrosRecaudo[0]?.valorparametro ? parametrosRecaudo[0]?.valorparametro : ''}
-${!!parametrosRecaudo[1]?.valorparametro ? parametrosRecaudo[1]?.valorparametro : ''}
-Fecha: ${moment().format('DD-MM-YYYY HH:mm:ss')}
-
-Vigencia desde: ${contrato.vigenciadesde}
-Vigencia hasta: ${contrato.vigenciahasta}
-Valor vig. contrato: $${contrato.valorcontrato}
-Periodicidad pago: ${contrato.periodicidad1}
-
---------------------------------------
-RECIBO DE CAJA
-${numeroRecibo}
-Contrato Nro: ${contrato.numeropoliza}
-Tipo de Registro: Recaudo
-Pagado Por:
-    Dto: ${contrato.numero_documento}
-    ${contrato.name}
-ValorRecaudado: ${valor}
-Forma de Pago: Efectivo
-Observaciones: ${description}
---------------------------------------
-
-${!!parametrosRecaudo[2]?.valorparametro ? parametrosRecaudo[2]?.valorparametro : ''}
-${!!parametrosRecaudo[3]?.valorparametro ? parametrosRecaudo[3]?.valorparametro : ''}
-${!!parametrosRecaudo[4]?.valorparametro ? parametrosRecaudo[4]?.valorparametro : ''}
-${!!parametrosRecaudo[5]?.valorparametro ? parametrosRecaudo[5]?.valorparametro : ''}
-${!!parametrosRecaudo[6]?.valorparametro ? parametrosRecaudo[6]?.valorparametro : ''}
-
-
-
-
-
-
-
-`;
+    const isDisabled = () => {
+        if (!!numeroRecibo) return true;
+        return !(!!description && !!valor);
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -68,6 +40,7 @@ ${!!parametrosRecaudo[6]?.valorparametro ? parametrosRecaudo[6]?.valorparametro 
                         <Text>Contrato: {contrato.numeropoliza}</Text>
                         <Text>Valor contrato: ${contrato.valorcontrato}</Text>
                         <Text>Total cartera: ${contrato.totalcartera}</Text>
+                        <Text>Valor cuota: ${contrato.valorcuota}</Text>
                         <Text>Vigencia desde: {contrato.vigenciadesde}</Text>
                         <Text>Vigencia hasta: {contrato.vigenciahasta}</Text>
                         <Text>Periodicidad: {contrato.periodicidad1}</Text>
@@ -118,19 +91,12 @@ ${!!parametrosRecaudo[6]?.valorparametro ? parametrosRecaudo[6]?.valorparametro 
                                     primary: '#96158C',
                                 }
                             }}
-                            onPress={async () => {
-                                try {
-                                    await BluetoothEscposPrinter.printerInit();
-                                    await BluetoothEscposPrinter.printText(createTicket(), {});
-                                } catch (e) {
-                                    console.log(e);
-                                    Alert.alert('Error en impresión', 'Revisa tu conexión con la impresora');
-                                }
-                            }}>
+                            onPress={() => print(createTicketRecaudo(contrato, numeroRecibo, valor, description, parametrosRecaudo))}
+                        >
                             Imprimir
                         </Button>
                         <Button
-                            disabled={!(!!description && !!valor)}
+                            disabled={isDisabled()}
                             theme={{
                                 colors: {
                                     primary: '#96158C',

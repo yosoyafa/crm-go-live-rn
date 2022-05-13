@@ -23,6 +23,7 @@ const RecaudoScreen = ({ navigation, route }) => {
     const [pos, setPos] = useState({ lat: 0, lon: 0 });
     const [loading, setLoading] = useState(false);
     const [numeroRecibo, setNumeroRecibo] = useState('');
+    const [disableFields, setDisableFields] = useState(false)
 
     const isDisabled = () => {
         if (!!numeroRecibo) return true;
@@ -33,7 +34,6 @@ const RecaudoScreen = ({ navigation, route }) => {
         <SafeAreaView style={{ flex: 1 }}>
             <ScrollView>
                 <View style={styles.card}>
-
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#96158C' }}>{contrato.name}</Text>
                         <Text>CC: {contrato.numero_documento}</Text>
@@ -45,8 +45,9 @@ const RecaudoScreen = ({ navigation, route }) => {
                         <Text>Vigencia hasta: {contrato.vigenciahasta}</Text>
                         <Text>Periodicidad: {contrato.periodicidad1}</Text>
                     </View>
-
                     <TextInput
+                        disabled={disableFields}
+                        editable={!disableFields}
                         style={{ marginBottom: 20 }}
                         theme={{
                             colors: {
@@ -65,8 +66,9 @@ const RecaudoScreen = ({ navigation, route }) => {
                             />
                         }
                     />
-
                     <TextInput
+                        disabled={disableFields}
+                        editable={!disableFields}
                         style={{ marginBottom: 20 }}
                         theme={{
                             colors: {
@@ -80,7 +82,6 @@ const RecaudoScreen = ({ navigation, route }) => {
                         label='Descripción'
                         mode='outlined'
                     />
-
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                         <Button
                             disabled={!(!!description && !!valor && !!bleOpened && !!numeroRecibo)}
@@ -112,8 +113,9 @@ const RecaudoScreen = ({ navigation, route }) => {
                                 recaudo(false, pos.lat, pos.lon, contrato.numero_documento, valor.substring(1), nowFormatted, description, 'Efectivo')
                                     .then(
                                         (out) => {
-                                            setLoading(false);
+                                            setLoading(false)
                                             setNumeroRecibo(out.rc)
+                                            setDisableFields(true)
                                         }
                                     );
                             }}>

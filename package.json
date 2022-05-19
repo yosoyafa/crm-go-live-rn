@@ -7,7 +7,10 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "android:release": "react-native run-android --variant=release",
+    "release:bundle": "cd android && ./gradlew bundleRelease && cd ..",
+    "release:apk": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",

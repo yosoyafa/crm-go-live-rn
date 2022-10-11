@@ -101,8 +101,8 @@ const HomeScreen = ({ navigation }) => {
                                             optionsVisible={item.numeropoliza === openCard}
                                             setOptionsVisible={setOpenCard}
                                             gestion={() => navigation.navigate('Gestion', { contrato: item })}
-                                            recaudo={() => navigation.navigate('Recaudo', { contrato: item })}
-                                            edicion={() => navigation.navigate('Edicion', { contrato: item })}
+                                            recaudo={() => navigation.navigate('Edicion', { contrato: item, recaudo: true })}
+                                            edicion={() => navigation.navigate('Edicion', { contrato: item, recaudo: false })}
                                         />
                                     )
                                 }}

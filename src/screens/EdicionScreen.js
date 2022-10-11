@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Text, View, StyleSheet, ScrollView, SafeAreaView, Picker, Modal, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { Button, TextInput } from 'react-native-paper';
+import { Button, TextInput, Switch } from 'react-native-paper';
 
 import moment from 'moment';
 import call from 'react-native-phone-call'
@@ -15,7 +15,7 @@ const EdicionScreen = ({ navigation, route }) => {
 
     const { edicion, cartera } = useContext(Context);
 
-    const { contrato } = route.params;
+    const { contrato, recaudo } = route.params;
 
     const [loading, setLoading] = useState(false);
     const [editBarrio, setEditBarrio] = useState(false);
@@ -28,11 +28,15 @@ const EdicionScreen = ({ navigation, route }) => {
     const [numero, setNumero] = useState('');
     const [num1, setNum1] = useState('');
     const [num2, setNum2] = useState('');
+    const [email, setEmail] = useState('');
     const [barrio, setBarrio] = useState({});
     const [indicaciones, setIndicaciones] = useState('');
     const [diaCobro, setDiaCobro] = useState('');
+    const [noHayDatosPorActualizar, setNoHayDatosPorActualizar] = useState(false)
 
     const [query, setQuery] = useState('');
+
+    console.log(contrato)
 
     const handleSearch = text => {
         const formattedQuery = text.toLowerCase();
@@ -52,9 +56,13 @@ const EdicionScreen = ({ navigation, route }) => {
         call(args).catch(console.error)
     };
 
+    const goToRecaudo = () => navigation.navigate('Recaudo', { contrato })
+
+    const hayNuevosDatos = !!diaCobro || !!indicaciones || !!barrio.barrio || !!num1 || !!num2 || !!email || (selectedValue && viaPrincipal && viaSecundaria && numero)
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.container}>
                     <Text style={{ fontWeight: 'bold', fontSize: 18, color: '#96158C', marginBottom: 8 }}>{contrato.name}</Text>
                     <Text>CC: {contrato.numero_documento}</Text>
@@ -63,6 +71,7 @@ const EdicionScreen = ({ navigation, route }) => {
                     <Text>Indicaciones: {contrato.indicaciones}</Text>
                     <Text onPress={() => { makeCall(contrato.celular1) }}>Teléfono 1: {contrato.celular1}</Text>
                     <Text onPress={() => { makeCall(contrato.celular2) }}>Teléfono 2: {contrato.celular2}</Text>
+                    <Text>Correo electrónico: {contrato.email}</Text>
                     <Text>Dia de cobro: {contrato.dia_cobro}</Text>
                     <View style={{ borderRadius: 4, borderWidth: 1, borderColor: 'grey', marginVertical: 20, padding: 10 }}>
                         <Text style={{ marginTop: -21, marginBottom: 10, backgroundColor: '#F2F2F2', width: 80, paddingHorizontal: 10 }}>Direccion</Text>
@@ -145,6 +154,16 @@ const EdicionScreen = ({ navigation, route }) => {
                         mode='outlined'
                         keyboardType='decimal-pad'
                     />
+                    <TextInput
+                        theme={{ colors: { primary: '#96158C' } }}
+                        style={{ marginBottom: 20 }}
+                        numberOfLines={1}
+                        onChangeText={setEmail}
+                        value={email}
+                        label='Correo electrónico'
+                        mode='outlined'
+                        keyboardType='email-address'
+                    />
                     <View style={{ borderRadius: 4, borderWidth: 1, borderColor: 'grey', marginBottom: 10 }}>
                         {!!diaCobro && < Text style={{ marginTop: -11, backgroundColor: '#F2F2F2', width: 90, paddingHorizontal: 5, marginLeft: 8 }}>Dia de cobro</Text>}
                         <Picker
@@ -156,20 +175,36 @@ const EdicionScreen = ({ navigation, route }) => {
                             {dias.map((item, key) => <Picker.Item key={key} label={item + ''} value={item + ''} />)}
                         </Picker>
                     </View>
+                    {recaudo && (
+                        <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between', paddingVertical: 12 }}>
+                            <Text>No hay datos por actualizar</Text>
+                            <Switch
+                                value={noHayDatosPorActualizar}
+                                onValueChange={() => setNoHayDatosPorActualizar(!noHayDatosPorActualizar)}
+                                disabled={hayNuevosDatos}
+                            />
+                        </View>
+                    )}
                     <Button
                         theme={{ colors: { primary: '#96158C' } }}
                         icon="content-save"
                         mode="contained"
-                        disabled={!(!!diaCobro || !!indicaciones || !!barrio.barrio || !!num1 || !!num2 || (selectedValue && viaPrincipal && viaSecundaria && numero))}
+                        disabled={!hayNuevosDatos && !noHayDatosPorActualizar}
                         onPress={() => {
+                            if (noHayDatosPorActualizar) {
+                                return goToRecaudo()
+                            }
                             setLoading(true);
                             Geolocation.getCurrentPosition(info => setPos({ lat: info?.coords?.latitude, lon: info?.coords?.longitude }));
                             const now = moment();
                             const nowFormatted = now.clone().format('DD-MM-YYYY hh:mm:ss');
-                            edicion(false, pos.lat, pos.lon, contrato.numero_documento, nowFormatted, contrato.celular1, !!num1 ? num1 : contrato.celular1, contrato.celular2, !!num2 ? num2 : contrato.celular2, contrato.direccion, (!!selectedValue && !!viaPrincipal && !!viaSecundaria && !!numero) ? `${selectedValue} ${viaPrincipal} No. ${viaSecundaria} - ${numero}` : contrato.direccion, contrato.idbarrio, !!barrio.id ? barrio.id : contrato.idbarrio, contrato.indicaciones, !!indicaciones ? indicaciones : contrato.indicaciones, contrato.dia_cobro, !!diaCobro ? diaCobro : contrato.dia_cobro)
-                                .then(() => setLoading(false));
+                            edicion(false, pos.lat, pos.lon, contrato.numero_documento, nowFormatted, contrato.celular1, !!num1 ? num1 : contrato.celular1, contrato.celular2, !!num2 ? num2 : contrato.celular2, contrato.email, email || contrato.email, contrato.direccion, (!!selectedValue && !!viaPrincipal && !!viaSecundaria && !!numero) ? `${selectedValue} ${viaPrincipal} No. ${viaSecundaria} - ${numero}` : contrato.direccion, contrato.idbarrio, !!barrio.id ? barrio.id : contrato.idbarrio, contrato.indicaciones, !!indicaciones ? indicaciones : contrato.indicaciones, contrato.dia_cobro, !!diaCobro ? diaCobro : contrato.dia_cobro)
+                                .then(() => {
+                                    setLoading(false)
+                                    if (recaudo) goToRecaudo()
+                                })
                         }}>
-                        Guardar
+                        {noHayDatosPorActualizar ? 'Siguiente' : 'Guardar'}
                     </Button>
                 </View>
             </ScrollView>

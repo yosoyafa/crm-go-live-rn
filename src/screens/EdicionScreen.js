@@ -198,7 +198,7 @@ const EdicionScreen = ({ navigation, route }) => {
                             Geolocation.getCurrentPosition(info => setPos({ lat: info?.coords?.latitude, lon: info?.coords?.longitude }));
                             const now = moment();
                             const nowFormatted = now.clone().format('DD-MM-YYYY hh:mm:ss');
-                            edicion(false, pos.lat, pos.lon, contrato.numero_documento, nowFormatted, contrato.celular1, !!num1 ? num1 : contrato.celular1, contrato.celular2, !!num2 ? num2 : contrato.celular2, contrato.email, email ?? contrato.email, contrato.direccion, (!!selectedValue && !!viaPrincipal && !!viaSecundaria && !!numero) ? `${selectedValue} ${viaPrincipal} No. ${viaSecundaria} - ${numero}` : contrato.direccion, contrato.idbarrio, !!barrio.id ? barrio.id : contrato.idbarrio, contrato.indicaciones, !!indicaciones ? indicaciones : contrato.indicaciones, contrato.dia_cobro, !!diaCobro ? diaCobro : contrato.dia_cobro)
+                            edicion(false, pos.lat, pos.lon, contrato.numero_documento, nowFormatted, contrato.celular1, !!num1 ? num1 : contrato.celular1, contrato.celular2, !!num2 ? num2 : contrato.celular2, contrato.email, email || contrato.email, contrato.direccion, (!!selectedValue && !!viaPrincipal && !!viaSecundaria && !!numero) ? `${selectedValue} ${viaPrincipal} No. ${viaSecundaria} - ${numero}` : contrato.direccion, contrato.idbarrio, !!barrio.id ? barrio.id : contrato.idbarrio, contrato.indicaciones, !!indicaciones ? indicaciones : contrato.indicaciones, contrato.dia_cobro, !!diaCobro ? diaCobro : contrato.dia_cobro)
                                 .then(() => {
                                     setLoading(false)
                                     if (recaudo) goToRecaudo()

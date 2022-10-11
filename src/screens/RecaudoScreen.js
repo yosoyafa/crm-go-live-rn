@@ -32,7 +32,7 @@ const RecaudoScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.card}>
                     <View style={{ marginBottom: 20 }}>
                         <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#96158C' }}>{contrato.name}</Text>
@@ -120,7 +120,7 @@ const RecaudoScreen = ({ navigation, route }) => {
                                     );
                             }}>
                             Pagar
-                                </Button>
+                        </Button>
                     </View>
                 </View>
             </ScrollView>

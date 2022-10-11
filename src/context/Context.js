@@ -260,11 +260,15 @@ export const Provider = ({ children }) => {
                 let responseBarrios = await fetch(`https://ws.crmolivosvillavicencio.com/app/getBarrio.php`);
                 let barrios = await responseBarrios.json();
 
+                let responseAcciones = await fetch(`https://ws.crmolivosvillavicencio.com/app/getAcciones.php`);
+                let acciones = await responseAcciones.json() || [];
+
                 const today = new Date();
                 const mCartera = {
                     fecha: `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`,
                     contratos,
-                    barrios
+                    barrios,
+                    acciones,
                 }
                 modifyCartera(mCartera);
             } catch (error) {
@@ -441,10 +445,10 @@ export const Provider = ({ children }) => {
         }
     };
 
-    const edicion = async (silent = false, lat, lon, cc, fecha, tel1viejo, tel1nuevo, tel2viejo, tel2nuevo, direccionVieja, direccionNueva, barrioViejo, barrioNuevo, indicacionVieja, indicacionNueva, diaCobroViejo, diaCobroNuevo, isSync = false) => {
+    const edicion = async (silent = false, lat, lon, cc, fecha, tel1viejo, tel1nuevo, tel2viejo, tel2nuevo, emailViejo, emailNuevo, direccionVieja, direccionNueva, barrioViejo, barrioNuevo, indicacionVieja, indicacionNueva, diaCobroViejo, diaCobroNuevo, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
+            console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
+            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
             let json = await response.json();
             //console.log(json);
             if (json.estado === 'successful') {

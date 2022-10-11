@@ -12,7 +12,7 @@ import { createTicketGestion, print } from '../utils/tools';
 
 const GestionScreen = ({ navigation, route }) => {
 
-    const { gestion, bleOpened, parametrosGestion } = useContext(Context);
+    const { gestion, bleOpened, parametrosGestion, cartera: { acciones } } = useContext(Context);
 
     const { contrato } = route.params;
 
@@ -23,6 +23,7 @@ const GestionScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false);
     const [pos, setPos] = useState({ lat: 0, lon: 0 });
     const [numeroRecibo, setNumeroRecibo] = useState('');
+    const [disableFields, setDisableFields] = useState(false)
 
     const toggleSwitch = () => {
         setIsEnabled(previousState => !previousState);
@@ -71,7 +72,7 @@ const GestionScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps='always'>
                 <View style={styles.card}>
                     <Text style={{ fontWeight: 'bold', fontSize: 16, color: '#96158C' }}>{contrato.name}</Text>
                     <Text>CC: {contrato.numero_documento}</Text>
@@ -83,10 +84,9 @@ const GestionScreen = ({ navigation, route }) => {
                             mode={'dropdown'}
                             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                         >
-                            <Picker.Item label="Titular se contacta" value="1" />
-                            <Picker.Item label="Mensaje con tercero" value="2" />
-                            <Picker.Item label="No hay contacto" value="3" />
-                            <Picker.Item label="Retiro" value="4" />
+                            {acciones.map((accion) => (
+                                <Picker.Item key={accion.nombre} label={accion.nombre} value={accion.id} />
+                            ))}
                         </Picker>
                     </View>
 
@@ -103,6 +103,8 @@ const GestionScreen = ({ navigation, route }) => {
                         value={description}
                         label='Descripción'
                         mode='outlined'
+                        disabled={disableFields}
+                        editable={!disableFields}
                     />
 
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
@@ -113,6 +115,7 @@ const GestionScreen = ({ navigation, route }) => {
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={toggleSwitch}
                             value={isEnabled}
+                            disabled={disableFields}
                         />
                     </View>
 
@@ -123,10 +126,11 @@ const GestionScreen = ({ navigation, route }) => {
                                     primary: '#96158C',
                                 }
                             }}
+                            disabled={disableFields}
+                            editable={!disableFields}
                             style={{ marginBottom: 20 }}
                             onChangeText={(text) => setValor(text)}
                             value={valor}
-                            keyboardType={'numbers-and-punctuation'}
                             label='Valor a pagar'
                             mode='outlined'
                             keyboardType='decimal-pad'
@@ -150,6 +154,7 @@ const GestionScreen = ({ navigation, route }) => {
                                 icon="calendar"
                                 size={30}
                                 onPress={showDatepicker}
+                                disabled={disableFields}
                             />
                         </View>
                         {show && <DateTimePicker
@@ -194,7 +199,7 @@ const GestionScreen = ({ navigation, route }) => {
                                         (out) => {
                                             setLoading(false);
                                             setNumeroRecibo(out.rc);
-
+                                            setDisableFields(true)
                                         }
                                     );
                             }}>

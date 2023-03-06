@@ -10,7 +10,7 @@ export const Provider = ({ children }) => {
     const [logged, setLogged] = useState('0');
     const [cartera, setCartera] = useState({});
     const [history, setHistory] = useState({});
-    const [user, setUser] = useState('');
+    const [user, setUser] = useState({});
     const [find, setFind] = useState([]);
 
     const [recaudosOffline, setRecaudosOffline] = useState([]);
@@ -253,14 +253,14 @@ export const Provider = ({ children }) => {
     const downloadCartera = async (id) => {
         if (id) {
             try {
-                console.log(`https://ws.crmolivosvillavicencio.com/app/getCartera1.php?user_id=${id}`);
-                let responseContratos = await fetch(`https://ws.crmolivosvillavicencio.com/app/getCartera1.php?user_id=${id}`);
+                console.log(`https://${user.url}getCartera1.php?user_id=${id}`);
+                let responseContratos = await fetch(`https://${user.url}getCartera1.php?user_id=${id}`);
                 let contratos = await responseContratos.json();
 
-                let responseBarrios = await fetch(`https://ws.crmolivosvillavicencio.com/app/getBarrio.php`);
+                let responseBarrios = await fetch(`https://${user.url}getBarrio.php`);
                 let barrios = await responseBarrios.json();
 
-                let responseAcciones = await fetch(`https://ws.crmolivosvillavicencio.com/app/getAcciones.php`);
+                let responseAcciones = await fetch(`https://${user.url}getAcciones.php`);
                 let acciones = await responseAcciones.json() || [];
 
                 const today = new Date();
@@ -280,12 +280,12 @@ export const Provider = ({ children }) => {
     const getHistory = async (id) => {
         if (id) {
             try {
-                console.log(`https://ws.crmolivosvillavicencio.com/app/getHistorialRecaudos.php?user_id=${id}`);
-                let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getHistorialRecaudos.php?user_id=${id}`);
+                console.log(`https://${user.url}getHistorialRecaudos.php?user_id=${id}`);
+                let response = await fetch(`https://${user.url}getHistorialRecaudos.php?user_id=${id}`);
                 let recaudos = await response.json();
 
-                console.log(`https://ws.crmolivosvillavicencio.com/app/getHistorialGestiones.php?user_id=${id}`);
-                let responseG = await fetch(`https://ws.crmolivosvillavicencio.com/app/getHistorialGestiones.php?user_id=${id}`)
+                console.log(`https://${user.url}getHistorialGestiones.php?user_id=${id}`);
+                let responseG = await fetch(`https://${user.url}getHistorialGestiones.php?user_id=${id}`)
                 let gestiones = await responseG.json();
 
                 const today = new Date();
@@ -303,8 +303,8 @@ export const Provider = ({ children }) => {
 
     const findCC = async (cc, id) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
+            console.log(`https://${user.url}getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
+            let response = await fetch(`https://${user.url}getCarterabyCedula.php?user_id=${id}+&NumeroDocumento=${cc}`);
             let json = await response.json();
             if (json) {
                 setFind(json);
@@ -321,8 +321,8 @@ export const Provider = ({ children }) => {
 
     const recaudoOffline = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
+            console.log(`https://${user.url}getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
+            let response = await fetch(`https://${user.url}getRecaudosOff.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Recaudo exitoso');
@@ -362,8 +362,8 @@ export const Provider = ({ children }) => {
 
     const recaudo = async (silent = false, lat, lon, cc, valor, fecha, observacion, fdp, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
+            console.log(`https://${user.url}getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`)
+            let response = await fetch(`https://${user.url}getRecaudos.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&valorrecaudo=${valor}&id=${user.id}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&detallerecaudo=${observacion}&forma_de_pago=${fdp}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Recaudo exitoso');
@@ -403,8 +403,8 @@ export const Provider = ({ children }) => {
 
     const gestion = async (silent = false, lat, lon, cc, tipoGestion, fecha, acuerdo, fechaAcuerdo, valorAcuerdo, descripcion, resultadoGestion, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
+            console.log(`https://${user.url}getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
+            let response = await fetch(`https://${user.url}getGestionCartera.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&tipo_gestion=${tipoGestion}&fecha=${fecha}&rc=${user.iniciales_numerador}&fecha_hora=${fecha}&acuerdo_pago=${acuerdo}&fecha_acuerdo=${fechaAcuerdo}&valor_acuerdo=${valorAcuerdo}&descripcion=${descripcion}&resultado_gestion=${resultadoGestion}&user_id=${user.id}&nueva=${1}`);
             let json = await response.json();
             if (json.estado === 'successful') {
                 if (!isSync) Alert.alert('Éxito', 'Gestión exitosa');
@@ -447,8 +447,8 @@ export const Provider = ({ children }) => {
 
     const edicion = async (silent = false, lat, lon, cc, fecha, tel1viejo, tel1nuevo, tel2viejo, tel2nuevo, emailViejo, emailNuevo, direccionVieja, direccionNueva, barrioViejo, barrioNuevo, indicacionVieja, indicacionNueva, diaCobroViejo, diaCobroNuevo, isSync = false) => {
         try {
-            console.log(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
-            let response = await fetch(`https://ws.crmolivosvillavicencio.com/app/getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
+            console.log(`https://${user.url}getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
+            let response = await fetch(`https://${user.url}getUpdateInfo.php?user_name=${user.user_name}&latitud=${lat}&longitud=${lon}&numerodocumento=${cc}&fecha=${fecha}&user_id=${user.id}&celular1_o=${tel1viejo}&celular1_n=${tel1nuevo}&celular2_o=${tel2viejo}&celular2_n=${tel2nuevo}&email_o=${emailViejo}&email_n=${emailNuevo}&direccion_o=${direccionVieja}&direccion_n=${direccionNueva}&barrio_o=${barrioViejo}&barrio_n=${barrioNuevo}&indicaciones_o=${indicacionVieja}&indicaciones_n=${indicacionNueva}&dia_cobro_o=${diaCobroViejo}&dia_cobro_n=${diaCobroNuevo}&nueva=${1}`);
             let json = await response.json();
             //console.log(json);
             if (json.estado === 'successful') {
@@ -633,8 +633,8 @@ export const Provider = ({ children }) => {
 
     const getParametrosRecaudo = async () => {
         try {
-            console.log('https://ws.crmolivosvillavicencio.com/app/getParametrosRecibo.php');
-            let response = await fetch('https://ws.crmolivosvillavicencio.com/app/getParametrosRecibo.php');
+            console.log('https://${user.url}getParametrosRecibo.php');
+            let response = await fetch('https://${user.url}getParametrosRecibo.php');
             let data = await response.json();
             modifyParametrosRecaudo(data);
         } catch (error) {
@@ -644,8 +644,8 @@ export const Provider = ({ children }) => {
 
     const getParametrosGestion = async () => {
         try {
-            console.log('https://ws.crmolivosvillavicencio.com/app/getParametrosGestion.php');
-            let response = await fetch('https://ws.crmolivosvillavicencio.com/app/getParametrosGestion.php');
+            console.log('https://${user.url}getParametrosGestion.php');
+            let response = await fetch('https://${user.url}getParametrosGestion.php');
             let data = await response.json();
             modifyParametrosGestion(data);
         } catch (error) {
